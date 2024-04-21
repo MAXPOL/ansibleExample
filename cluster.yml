@@ -1,0 +1,12 @@
+- name: Cluster group install
+  hosts: cluster
+  tasks:
+    - name: Install httpd package
+      yum:
+        name: httpd
+        state: present
+
+    - name: Start httpd service
+      systemd:
+        name: httpd
+        state: started
