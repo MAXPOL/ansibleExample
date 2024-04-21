@@ -85,3 +85,7 @@
 
     - name: mysql set password
       command: mysql -u root -e "set password = password('passsword3204')"
+
+    - name: create database
+      command: mysql -u root -ppasssword3204 -e "CREATE DATABASE testingdb"
+
