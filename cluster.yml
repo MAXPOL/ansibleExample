@@ -1,4 +1,5 @@
-- name: Cluster group install
+
+- name: Cluster config
   hosts: cluster
   tasks:
     - name: Install httpd package
@@ -10,3 +11,77 @@
       systemd:
         name: httpd
         state: started
+
+    - name: Copy files
+      copy:
+        src: /testfile
+        dest: /
+
+#    - name: Add service http
+#      firewalld:
+#        service: http
+#        permanent: yes
+#        immediate: yes
+#        state: enabled
+#
+#    - name: Restart firewalld
+#      systemd:
+#        name: firewalld
+#        state: restarted
+
+    - name: Install samba packege
+      yum:
+        name: samba
+        state: present
+
+    - name: Create folder акder for samba
+      file:
+        path: /share
+        state: directory
+        mode: 0777
+
+#    - name: chcon
+#      command: chcon -t samba_share_t /share
+
+    - name: Install samba packege
+      yum:
+        name: nano
+        state: present
+
+    - name: Copy files
+      copy:
+        src: /smb.conf
+        dest: /etc/samba/
+
+    - name: Start httpd service
+      systemd:
+        name: smb
+        state: started
+
+    - name: Start httpd service
+      systemd:
+        name: nmb
+        state: started
+
+    - name: Install samba packege
+      yum:
+        name: mariadb
+        state: present
+
+      - name: Install samba packege
+      yum:
+        name: mariadb-server
+        state: present
+
+#    - name: Install samba packege
+#      yum:
+#        name: mariadb-client
+#        state: present
+
+    - name: Start httpd service
+      systemd:
+        name: mariadb
+        state: started
+
+    - name: mysql set password
+      command: mysql -u root -e "set password = password('passsword3204')"
