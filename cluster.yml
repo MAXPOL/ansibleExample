@@ -68,7 +68,7 @@
         name: mariadb
         state: present
 
-      - name: Install samba packege
+    - name: Install samba packege
       yum:
         name: mariadb-server
         state: present
